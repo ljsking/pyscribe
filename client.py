@@ -22,6 +22,8 @@ transport = TTransport.TFramedTransport(socket)
 protocol = TBinaryProtocol.TBinaryProtocol(trans=transport, strictRead=False, strictWrite=False)
 client = scribe.Client(iprot=protocol, oprot=protocol)
 
-transport.open()
-result = client.Log(messages=[log_entry])
-transport.close()
+
+for i in range(10000):
+    transport.open()
+    result = client.Log(messages=[log_entry])
+    transport.close()

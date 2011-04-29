@@ -4,4 +4,5 @@ class Parser:
     def __init__(self):
         pass
     def parse(self, message):
-        sys.stderr.write("this is custom parser %s\n"%message)
+        pass
+        #sys.stderr.write("this is custom parser %s\n"%message)

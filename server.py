@@ -14,8 +14,12 @@ from thrift.server import TServer
 
 import handler
 import conf
+import logging
 
 users = []
+
+#set logging
+logging.basicConfig(level=logging.INFO)
 
 #read configure file
 config = conf.load_config('conf/pyscribe.conf')
