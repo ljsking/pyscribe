@@ -2,6 +2,7 @@
 
 import sys
 sys.path.append('./gen-py')
+sys.path.append('./module')
 
 from scribe import *
 from scribe.ttypes import *
@@ -11,23 +12,20 @@ from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol
 from thrift.server import TServer
 
+import handler
+import conf
+
 users = []
 
-class LogHandler:
-	def __init__(self):
-		pass
-		#self.log = {}
+#read configure file
+config = conf.load_config('conf/pyscribe.conf')
 
-	def Log(self, entries):
-	    for entry in entries:
-	        print '%s:%s'%(entry.category, entry.message)
-		return ResultCode.OK
+handler = handler.LogHandler()
+#set parsers
+handler.parsers = conf.get_parsers(config.items('parsers'))
 
-
-
-handler = LogHandler()
 processor = scribe.Processor(handler)
-transport = TSocket.TServerSocket(9999)
+transport = TSocket.TServerSocket(config.getint('common', 'port'))
 tfactory = TTransport.TFramedTransportFactory()
 pfactory = TBinaryProtocol.TBinaryProtocolFactory()
 

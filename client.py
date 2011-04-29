@@ -9,7 +9,7 @@ from scribe.ttypes import *
 from thrift.transport import TTransport, TSocket
 from thrift.protocol import TBinaryProtocol
 
-category = 'test_cat'
+category = 'ncs_index_err'
 message = 'test_message'
 
 host = 'localhost'
